@@ -1,0 +1,17 @@
+Localização dos Códigos: 
+
+--
+Código SPLASH - "./app.json", "./navigation/index.tsx", "./assets/splashCICv5.png".
+--
+
+--
+Código LOGIN - "./screens/Login.tsx", "./navigation/index.tsx".
+--
+
+--
+Código HOME - "./screens/Home.tsx", "./navigation/index.tsx".
+--
+
+--
+Código NavigationBar - "./App.tsx", "./navigation/index.tsx".
+--
