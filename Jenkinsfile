@@ -1,55 +1,46 @@
 pipeline {
-    agent any  // O pipeline pode ser executado em qualquer nó do Jenkins
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                // Fazer o checkout do código do repositório Git
-                git branch: 'main', url: 'https://github.com/usuario/repositorio.git'
+                checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                // Compile o código (no caso de um projeto Java)
-                sh 'javac -d bin src/*.java'
+                // Comando para compilar o projeto, como:
+                sh 'mvn clean install' // Para um projeto Maven
+                // ou 
+                // sh 'gradle build' // Para um projeto Gradle
             }
         }
 
         stage('Test') {
             steps {
-                // Comando para rodar testes (personalize conforme sua stack de testes)
-                sh 'echo "Running tests..."'
+                // Comando para rodar os testes
+                sh 'mvn test' // Para um projeto Maven
+                // ou 
+                // sh 'gradle test' // Para um projeto Gradle
             }
         }
 
         stage('Package') {
             steps {
-                // Empacote seu projeto (exemplo: criar um .jar)
-                sh 'jar -cvf meuProjeto.jar -C bin .'
+                // Comando para empacotar a aplicação
+                sh 'mvn package' // Para um projeto Maven
+                // ou 
+                // sh 'gradle build' // Para um projeto Gradle
             }
         }
 
         stage('Deploy') {
             steps {
-                // Aqui pode ser o processo de deploy ou outras etapas pós-build
-                echo 'Deploying application...'
+                // Comando para implantar a aplicação
+                // Exemplo de upload para um servidor ou similar
+                echo 'Deploying...'
             }
-        }
-    }
-
-    post {
-        always {
-            // Etapas que sempre serão executadas, independentemente de sucesso ou falha
-            echo 'Build complete'
-        }
-
-        success {
-            echo 'Build was successful!'
-        }
-
-        failure {
-            echo 'Build failed!'
         }
     }
 }
